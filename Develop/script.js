@@ -1,20 +1,12 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+var characterChoices= [];
+var string = [];
+var passwordInput = "";
+var passwordlLengthPrompt = "";
 
-// Write password to the #password input
-function writePassword() {
-  //var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-  passwordLength();
-  characterType();
-  
-
-}
-
+//Functions
 var passwordLength = function(){
-  var passwordlLengthPrompt =  window.prompt("Choose the lenght of the password by entering a number between 8-128");
+  passwordlLengthPrompt =  window.prompt("Choose the length of the password by entering a number between 8-128");
   
    //NEED TO PUT VALIDATION HERE THAT THEY CAN ONLY SELECT 8-120
    if (passwordlLengthPrompt > 7 && passwordlLengthPrompt < 129) {
@@ -25,11 +17,11 @@ var passwordLength = function(){
    }
    console.log(passwordlLengthPrompt);
 };
-var characterTypePrompt = [];
+
 var characterType = function () {
-  
-  characterTypePrompt.push(window.prompt('Please choose a character type, enter 1 for Lowercase, 2 for Uppercase, 3 for Numeric, 4 for Special Characters.'));
-  console.log(characterTypePrompt.length);
+  var characterTypePrompt=(window.prompt('Please choose a character type, enter 1 for Lowercase, 2 for Uppercase, 3 for Numeric, 4 for Special Characters.'));
+  characterChoices.push(characterTypePrompt);
+  console.log(characterChoices.length);
   characterTypePrompt = parseInt(characterTypePrompt);
   switch (characterTypePrompt) {
     case 1:
@@ -49,6 +41,7 @@ var characterType = function () {
      alert("You have chosen Special Characters.");
       break;
     default:
+      characterChoices.pop();
       characterType();
   }
   var addMoreConfirm = window.confirm('Would you like to add another character type?');
@@ -56,24 +49,53 @@ var characterType = function () {
     characterType();
   }
   else{
-    //I want to reach through each element of the array and put out a message showing what they picked
-    window.alert("You have chosen the following character types: \n"  + characterTypePrompt + " \n" +characterTypePrompt[1] + " \n" + characterTypePrompt[2] + " \n" + characterTypePrompt[3]);
+    window.alert("You have chosen the following character types: \n"  + characterChoices[0] + " \n" +characterChoices[1] + " \n" + characterChoices[2] + " \n" + characterChoices[3]);
   }
 
-console.log(characterTypePrompt);
-  };
+console.log(characterChoices);
+};
 
+var passwordGenerated = function(){
+  for (var i = 0; i < characterChoices.length; i++){
+    if (characterChoices[i]==='1' ){
+      string.push('abcdefghijklmnopqurstuvwxyz');
+    }
+    if (characterChoices[i]==='2'){
+      string.push('ABCDEFGHIJKLMNOPQURSTUVWXYZ');
+    }
+    if (characterChoices[i]==='3'){
+      string.push('0123456789');
+    }
+    if (characterChoices[i]==='4'){
+      string.push('!@#$%^&*()');
+    }
+  }
+  console.log(string);
+
+  for(var x = 0; x < string.length; x++){
+    passwordInput += string[x];
+    
+  }
+  
+  console.log(passwordInput);
+};
+
+//code provided 
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+  //var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+  passwordLength();
+  characterType();
+  passwordGenerated();
   
 
-//PSUDO CODE HERE
-//click the button and the following prompts show up
-  //Length between 8-128 characters
-    //User enters their choice and it is validated
+}
 
-  //Character types: lowercase, uppercase, numeric, and/or sepcial characters
-    //only one character type can be selected
-    //User enters their choice and it is validated
-    //NOTE I think the character type is what the whole password is made off
 
   //Generate password 
     //display on screen
@@ -82,6 +104,8 @@ console.log(characterTypePrompt);
   
   //Can I do a function to generat things randomely with Math
   //can write a function to do the character types?
+
+  //can I do an object that shows 1  = uppercase 2 lowercase 3 number 4 special characters
 
 
 
