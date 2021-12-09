@@ -3,19 +3,22 @@ var characterChoices= [];
 var string = [];
 var passwordInput = "";
 var passwordlLengthPrompt = "";
+var password = "";
+var passwordLengthTotal = "";
 
 //Functions
 var passwordLength = function(){
-  passwordlLengthPrompt =  window.prompt("Choose the length of the password by entering a number between 8-128");
+  passwordLengthTotal=  window.prompt("Choose the length of the password by entering a number between 8-128");
   
    //NEED TO PUT VALIDATION HERE THAT THEY CAN ONLY SELECT 8-120
-   if (passwordlLengthPrompt > 7 && passwordlLengthPrompt < 129) {
-      alert("You chose a password lenght of " + passwordlLengthPrompt + ".");
+   if (passwordLengthTotal > 7 && passwordLengthTotal < 129) {
+      alert("You chose a password lenght of " + passwordLengthTotal + ".");
    }
    else {
      passwordLength();  
    }
-   console.log(passwordlLengthPrompt);
+   passwordLength = passwordLengthTotal;
+   console.log(passwordLengthTotal);
 };
 
 var characterType = function () {
@@ -55,7 +58,7 @@ var characterType = function () {
 console.log(characterChoices);
 };
 
-var passwordGenerated = function(){
+var choiceConversion = function(){
   for (var i = 0; i < characterChoices.length; i++){
     if (characterChoices[i]==='1' ){
       string.push('abcdefghijklmnopqurstuvwxyz');
@@ -80,6 +83,17 @@ var passwordGenerated = function(){
   console.log(passwordInput);
 };
 
+var createPassword = function(){
+  for(var i = 0; i < passwordLengthTotal; i++) {
+    var char = Math.floor(Math.random() * passwordInput.length);
+    password += passwordInput.charAt(char);
+  }
+
+window.alert(password);
+
+};
+
+ 
 //code provided 
 var generateBtn = document.querySelector("#generate");
 
@@ -91,7 +105,9 @@ function writePassword() {
   passwordText.value = password;
   passwordLength();
   characterType();
-  passwordGenerated();
+  choiceConversion();
+  createPassword();
+  
   
 
 }
