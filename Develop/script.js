@@ -3,7 +3,7 @@ var characterChoices= [];
 var string = [];
 var passwordInput = "";
 var passwordlLengthPrompt = "";
-var password = "";
+var word = "";
 var passwordLengthTotal = "";
 
 //Functions
@@ -54,7 +54,6 @@ var characterType = function () {
   else{
     window.alert("You have chosen the following character types: \n"  + characterChoices[0] + " \n" +characterChoices[1] + " \n" + characterChoices[2] + " \n" + characterChoices[3]);
   }
-
 console.log(characterChoices);
 };
 
@@ -86,11 +85,9 @@ var choiceConversion = function(){
 var createPassword = function(){
   for(var i = 0; i < passwordLengthTotal; i++) {
     var char = Math.floor(Math.random() * passwordInput.length);
-    password += passwordInput.charAt(char);
+    word += passwordInput.charAt(char);
   }
-
-window.alert(password);
-
+return word;
 };
 
  
@@ -99,31 +96,14 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  //var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
   passwordLength();
   characterType();
   choiceConversion();
-  createPassword();
   
-  
+  var password = createPassword();
+  var passwordText = document.querySelector("#password");
 
+  passwordText.value = password;
+  
 }
-
-
-  //Generate password 
-    //display on screen
-    //OR display in alert
-
-  
-  //Can I do a function to generat things randomely with Math
-  //can write a function to do the character types?
-
-  //can I do an object that shows 1  = uppercase 2 lowercase 3 number 4 special characters
-
-
-
-// Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
